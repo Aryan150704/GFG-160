@@ -1,0 +1,21 @@
+class Solution {
+    public int myAtoi(String s) {
+        // Your code here
+        char ch[]=s.toCharArray();
+        int i=0, ans=1,sum=0;
+        while(i<ch.length && s.charAt(i)==' '){
+            i++;
+        }
+        if(i<s.length() && (s.charAt(i)=='-' || s.charAt(i)=='+' )){
+            if(s.charAt(i)=='-') ans=-1;
+            i++;
+        }
+        while(i<s.length() && s.charAt(i)>='0' && s.charAt(i)<='9'){
+            if(sum>Integer.MAX_VALUE/10||(ans==Integer.MAX_VALUE/10 && s.charAt(i)-'0'>7)){
+                return ans==1 ? Integer.MAX_VALUE:Integer.MIN_VALUE;
+            }
+            sum=10*sum+(s.charAt(i++)-'0');
+        }
+        return sum*ans;
+    }
+}
