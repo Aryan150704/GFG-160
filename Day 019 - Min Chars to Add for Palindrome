@@ -1,0 +1,25 @@
+class Solution {
+    public static int lpsArray(String s2){
+        int m=s2.length(),len=0,i=1;
+        char[] str=s2.toCharArray();
+        int lps[]=new int[m];
+        lps[0]=0;
+        while(i<m){
+            if(str[i]==str[len]) lps[i++]=++len;
+            else{
+                if(len!=0) len=lps[len-1];
+                else lps[i++]=0;
+            }
+        }
+        return lps[m-1];
+    }
+    public static String reverseNadd(String s){
+        String s1=new StringBuilder(s).reverse().toString();
+        return s+'$'+s1;
+    }
+    public static int minChar(String s) {
+        // Write your code here
+        String s2=reverseNadd(s);
+        return s.length()-lpsArray(s2);
+    }
+}
