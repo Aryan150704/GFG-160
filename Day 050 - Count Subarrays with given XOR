@@ -1,0 +1,20 @@
+class Solution {
+    public long subarrayXor(int arr[], int k) {
+        // code here
+        Map<Integer, Integer> freqMap=new HashMap<>();
+        int xor=0;
+        long count=0;
+        for(int num:arr){
+            xor^=num;
+            if(xor==k){
+                count++;
+            }
+            int required=xor^k;
+            if(freqMap.containsKey(required)){
+                count+=freqMap.get(required);
+            }
+            freqMap.put(xor, freqMap.getOrDefault(xor, 0)+1);
+        }
+        return count;
+    }
+}
