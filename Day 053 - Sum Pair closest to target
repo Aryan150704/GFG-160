@@ -1,0 +1,28 @@
+class Solution {
+    public List<Integer> sumClosest(int[] arr, int target) {
+        // code here
+        List<Integer> result=new ArrayList<>();
+        int n=arr.length;
+        if(n<2) return result;
+        Arrays.sort(arr);
+        int left=0, right=n-1;
+        int closestDiff=Integer.MAX_VALUE;
+        int maxAbsDiff=Integer.MIN_VALUE;
+        while(left<right){
+            int sum=arr[left]+arr[right];
+            int diff=Math.abs(sum-target);
+            int absDiff=Math.abs(arr[right]-arr[left]);
+            if(diff<closestDiff || (diff==closestDiff && absDiff>maxAbsDiff)){
+                closestDiff=diff;
+                maxAbsDiff=absDiff;
+                result=Arrays.asList(arr[left], arr[right]);
+            }
+            if(sum<target){
+                left++;
+            }else{
+                right--;
+            }
+        }
+        return result;
+    }
+}
