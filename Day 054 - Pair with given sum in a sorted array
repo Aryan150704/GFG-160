@@ -1,0 +1,15 @@
+class Solution {
+    int countPairs(int arr[], int target) {
+        // Complete the function
+        Map<Integer, Integer> freq=new HashMap<>();
+        int count=0;
+        for(int val:arr){
+            int complement=target-val;
+            if(freq.containsKey(complement)){
+                count+=freq.get(complement);
+            }
+            freq.put(val, freq.getOrDefault(val, 0)+1);
+        }
+        return count;
+    }
+}
